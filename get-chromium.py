@@ -99,12 +99,12 @@ def checkPriorInstall():
 				print "The last revision you have downloaded is outdated.\nUpdating..."
 		
 		else:
-			print "No Chromium snapshot has been downloaded yet. Downloading..."
+			pass
 			
 		openRevisionFile.close()
 		
 	except IOError:
-		print "You have not yet downloaded any Chromium snapshot, or they are stored in another directory."
+		print "You have not yet downloaded any Chromium snapshot, or they are stored in another directory. Downloading..."
 	
 def getSnapshot():
 	
