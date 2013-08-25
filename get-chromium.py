@@ -31,7 +31,7 @@ def createStringFromOS():
 		osStringAppend = osString[1]
 		
 		WinSnapshotChoice = raw_input("Would you like to download an installable revision or portable revision (no installation required)? (install/portable) ")
-		if WinSnapshotChoice != 'install' & WinSnapshotChoice != 'portable':
+		if WinSnapshotChoice != 'install' and WinSnapshotChoice != 'portable':
 			sys.exit()
 		elif WinSnapshotChoice == 'install':
 			dlfile = 'mini_installer.exe'
@@ -141,4 +141,4 @@ if __name__ == '__main__':
 	checkPriorInstall()
 	getSnapshot()
 	logNewInstall()
-	print "Done. Exiting...\r"
+	print "\nDone. Exiting...\r"
