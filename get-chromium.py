@@ -6,15 +6,11 @@ import urllib2
 import sys
 import platform
 
-global revisionFile
-revisionFile = 'LAST_INSTALL'
+global userOS; userOS = platform.system()
+global userArch; userArch = platform.machine()
 
-def findOS():
-	global userOS
-	global userArch
-	
-	userOS = platform.system()
-	userArch = platform.machine()
+global revisionFile; revisionFile = 'LAST_INSTALL'
+
 	
 def createStringFromOS():
 	
@@ -135,7 +131,6 @@ def logNewInstall():
 	updateRevisionFile.close()
 
 if __name__ == '__main__':
-	findOS()
 	createStringFromOS()
 	findSnapshotVer()
 	checkPriorInstall()
