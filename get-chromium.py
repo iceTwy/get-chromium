@@ -18,7 +18,7 @@ def findOS():
 	
 def createStringFromOS():
 	
-	osString = ['Mac', 'Win', 'Linux', 'Linux_x64', 'Arm', 'Android']
+	osString = ['Mac', 'Win', 'Linux', 'Linux_x64', 'Linux_ARM_Cross-Compile', 'Android']
 
 	global osStringAppend
 	global dlfile
