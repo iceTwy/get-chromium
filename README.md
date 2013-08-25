@@ -36,6 +36,4 @@ To contribute, please fork the project and submit a pull request when appropriat
 
 ### License
 
-get-chromium has been released into the public domain. Read LICENSE.md and check [unlicense.org](http://unlicense.org/) for further information.
-
-The WAIVER file is digitally signed with GPG by contributors to waive their copyright.
+get-chromium has been released into the public domain. Read LICENSE, WAIVER.md and check [unlicense.org](http://unlicense.org/) for further information.
