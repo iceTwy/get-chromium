@@ -207,7 +207,6 @@ def LogNewInstall(RevisionFile, SnapshotRev):
 	updateRevisionFile.close()
 
 if __name__ == '__main__':
-	BuildURLFromOS()
 	osStringAppend, dlfile = BuildURLFromOS()
 	SnapshotRev = FindSnapshotRevision(osStringAppend)
 	RevisionFile, userDLDir = CheckDirsFiles()
