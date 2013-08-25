@@ -43,14 +43,15 @@ def createStringFromOS():
 		
 		if userArch == 'x86_64':
 			osStringAppend = osString[3]
-				
-		elif 'arm' in 'userArch':
+		
+		elif 'arm' in userArch:
 			osStringAppend = osString[4]
-				
+		
 		else:
 			osStringAppend = osString[2]
-				
+			
 	else:
+		
 		print 'Platform not supported'
 		sys.exit()
 	
@@ -136,4 +137,4 @@ if __name__ == '__main__':
 	checkPriorInstall()
 	getSnapshot()
 	logNewInstall()
-	print "\nDone. Exiting...\r"
+	print "Done. Exiting...\r"
