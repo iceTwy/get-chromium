@@ -3,7 +3,7 @@ get-chromium
 
 A Python script to instantly download the latest Chromium snapshot. Works on Linux, Windows, Mac, ARM.
 
-![Chromium logo]("http://i.imgur.com/AcrrhKO.png")
+![Chromium logo]("https://upload.wikimedia.org/wikipedia/commons/thumb/archive/5/5f/20110410214417!Chromium_11_Logo.svg/120px-Chromium_11_Logo.svg.png")
 
 ###  How does it work?
 
