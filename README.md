@@ -1,9 +1,7 @@
 get-chromium
 ============
 
-A Python script to instantly download the latest Chromium snapshot. Works on Linux, Windows, Mac, ARM.
-
-![Chromium logo]("https://upload.wikimedia.org/wikipedia/commons/thumb/archive/5/5f/20110410214417!Chromium_11_Logo.svg/120px-Chromium_11_Logo.svg.png")
+A Python script to instantly download the latest Chromium snapshot. Works on Linux (including ARM), Windows, Mac, Android.
 
 ###  How does it work?
 
@@ -11,13 +9,15 @@ get-chromium attempts to retrieve the latest Chromium snapshots, available [here
 
 Place get-chromium.py in the directory where you would like to download the snapshots, and run it from there.
 
-Currently, the supported OS are Linux, Windows, Mac, ARM, and Android will also be implemented in the future. 
+Currently, the supported OS are Linux (x86, x86-64, ARM), Windows, Mac and Android.
 
 ### Requirements
 
-The only programs required to run get-chromium are:
+Depending on your OS, you must install the following programs to run get-chromium:
 
-* [Python 2.7.x](http://www.python.org/getit/ "Download Python") or below, down to 2.5.x
+* [Python 2.7.x](http://www.python.org/getit/ "Download Python") for Linux, Windows, Mac
+* [Python4Android r5](https://code.google.com/p/python-for-android/downloads/detail?name=PythonForAndroid_r5.apk "Python4Android r5") for Android
+* [PyPy 2.1](http://pypy.org/download.html "Download PyPy") for Linux ARM
 * Python modules urllib & urllib2
 
 ### Downloading Chromium
