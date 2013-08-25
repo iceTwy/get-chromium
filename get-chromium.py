@@ -38,26 +38,30 @@ def createStringFromOS():
 		else:
 			dlfile = 'chrome-win.zip'
 	
-	elif userOS == 'Linux':
-		dlfile = 'chrome-linux.zip'
-		
-		if userArch == 'x86_64':
-			osStringAppend = osString[3]
-		
-		elif 'arm' in userArch:
-			osStringAppend = osString[4]
-		
-		else:
-			osStringAppend = osString[2]
+	elif userOS == 'Linux':		
+		try:
+			import android
+			osStringAppend = osString[5]
+			dlfile = 'chrome-android.zip'
+		except ImportError:
+			dlfile = 'chrome-linux.zip'
 			
+			if userArch == 'x86_64':
+				osStringAppend = osString[3]
+			
+			elif 'arm' in userArch:
+				osStringAppend = osString[4]
+			
+			else:
+				osStringAppend = osString[2]
+				
 	else:
-		
 		print 'Platform not supported'
 		sys.exit()
 	
 def findSnapshotVer():
-	
 	global SnapshotVer
+	
 	try:
 		getSnapshotVer = urllib2.urlopen('https://commondatastorage.googleapis.com/chromium-browser-snapshots/' + osStringAppend + '/LAST_CHANGE', timeout=30)
 	except urllib2.URLError:
