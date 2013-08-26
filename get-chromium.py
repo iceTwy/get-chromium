@@ -60,7 +60,7 @@ def BuildURLFromOS():
 		elif WinSnapshotChoice == 'install':
 			dlfile = 'mini_installer.exe'
 		else:
-			dlfile = 'chrome-win.zip'
+			dlfile = 'chrome-win32.zip'
 	
 	elif userOS == 'Linux':		
 		try:
@@ -133,55 +133,76 @@ def CheckDirsFiles():
 	if check_DLDirFile == False:
 		create_DLDirFile = raw_input("You haven't defined a default download directory. Would you like to select one? (y/n) ")
 		
-		if create_DLDirFile != 'y' and createDLDirFile != 'n':
+		if create_DLDirFile != 'y' and create_DLDirFile != 'n':
 			sys.exit()
-		
-		elif create_DLDirFile == 'y':
-				touch_DLDirFile = open(DLDirFile, 'w')
-				choose_DLDir = raw_input("Choose a default download directory (e.g. ~/get-chromium): ")
-				touch_DLDirFile.write(choose_DLDir)
-				touch_DLDirFile.close()
-				print "Default download directory successfully chosen!"
-				
-				open_DLDirFile = open(DLDirFile, 'r')
-				userDLDir = open_DLDirFile.read()
-				open_DLDirFile.close()
-		else:
-			print "Snapshots will be downloaded to the current directory."
-	else:
-		open_DLDirFile = open(DLDirFile, 'r')
-		userDLDir = open_DLDirFile.read()
-		if not userDLDir:
+			
+		if create_DLDirFile == 'y':
 			touch_DLDirFile = open(DLDirFile, 'w')
 			choose_DLDir = raw_input("Choose a default download directory (e.g. ~/get-chromium): ")
 			touch_DLDirFile.write(choose_DLDir)
 			touch_DLDirFile.close()
-			
+			print "Default download directory successfully chosen!"
+				
+			open_DLDirFile = open(DLDirFile, 'r')
 			userDLDir = open_DLDirFile.read()
 			open_DLDirFile.close()
+			
 		else:
+			print "Snapshots will be downloaded to the current directory."
+			default_DLDir = os.getcwd()
+			touch_DLDirFile = open(DLDirFile, 'w')
+			touch_DLDirFile.write(default_DLDir)
+			touch_DLDirFile.close()
+				
+			open_DLDirFile = open(DLDirFile, 'r')
+			userDLDir = open_DLDirFile.read()
+			open_DLDirFile.close()
+	else: #DLDirFile exists
+		open_DLDirFile = open(DLDirFile, 'r')
+		userDLDir = open_DLDirFile.read()
+		
+		if not userDLDir: #if DLDir is an empty string
+			touch_DLDirFile = open(DLDirFile, 'w')
+			choose_DLDir = raw_input("Choose a default download directory (e.g. ~/get-chromium): ")
+			
+			if not choose_DLDir: #if the user doesn't select a default DL directory
+				#save current directory to DLDirFile
+				default_DLDir = os.getcwd()
+				touch_DLDirFile.write(default_DLDir)
+				touch_DLDirFile.close()
+				
+				userDLDir = open_DLDirFile.read()
+				open_DLDirFile.close()
+		else: #all is good, just save DLDir in userDLDir
 			open_DLDirFile.close()
 			
 	return RevisionFile, userDLDir
 
 def CheckPriorRevision(RevisionFile, SnapshotRev):
-	openRevisionFile = open(RevisionFile, 'r')
-	checkRevision = openRevisionFile.read()
+	
+	check_RevisionFile = os.path.exists(RevisionFile)
+	
+	if check_RevisionFile == True:
+		openRevisionFile = open(RevisionFile, 'r')
+		checkRevision = openRevisionFile.read()
 		
-	if checkRevision:
-		print "Downloaded Chromium snapshot revision: %s" % checkRevision
-		
-		if SnapshotRev == checkRevision:
-			print "You have already downloaded the latest Chromium snapshot.\nExiting..."
-			sys.exit()
+		if checkRevision:
+			print "Downloaded Chromium snapshot revision: %s" % checkRevision
+			
+			if SnapshotRev == checkRevision:
+				print "You have already downloaded the latest Chromium snapshot.\nExiting..."
+				sys.exit()
 				
-		elif SnapshotRev > checkRevision:
-			print "The last revision you have downloaded is outdated.\nUpdating..."
+			elif SnapshotRev > checkRevision:
+				print "The last revision you have downloaded is outdated.\nUpdating..."
+		
+		else:
+			print "You have not yet downloaded any Chromium snapshot, or they are stored in another directory. Downloading..."
 			
+		openRevisionFile.close()
+	
 	else:
-		print "You have not yet downloaded any Chromium snapshot, or they are stored in another directory. Downloading..."
-			
-	openRevisionFile.close()
+		print "No revision file found. Downloading..."
 		
 def GetSnapshot(osStringAppend, SnapshotRev, dlfile, userDLDir):
 	SnapshotURL = 'https://commondatastorage.googleapis.com/chromium-browser-snapshots/' + osStringAppend + '/' + SnapshotRev + '/' + dlfile
