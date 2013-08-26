@@ -139,9 +139,16 @@ def CheckDirsFiles():
 		if create_DLDirFile == 'y':
 			touch_DLDirFile = open(DLDirFile, 'w')
 			choose_DLDir = raw_input("Choose a default download directory (e.g. ~/get-chromium): ")
-			touch_DLDirFile.write(choose_DLDir)
-			touch_DLDirFile.close()
-			print "Default download directory successfully chosen!"
+			
+			if not choose_DLDir:
+				default_DLDir = os.getcwd()
+				touch_DLDirFile = open(DLDirFile, 'w')
+				touch_DLDirFile.write(default_DLDir)
+				touch_DLDirFile.close()
+				print("Default directory set to current directory.")
+				
+			else:
+				print "Default download directory successfully chosen!"
 				
 			open_DLDirFile = open(DLDirFile, 'r')
 			userDLDir = open_DLDirFile.read()
@@ -157,25 +164,32 @@ def CheckDirsFiles():
 			open_DLDirFile = open(DLDirFile, 'r')
 			userDLDir = open_DLDirFile.read()
 			open_DLDirFile.close()
-	else: #DLDirFile exists
+			
+	else:
 		open_DLDirFile = open(DLDirFile, 'r')
 		userDLDir = open_DLDirFile.read()
 		
-		if not userDLDir: #userDLDir is an empty string
+		if not userDLDir:
 			touch_DLDirFile = open(DLDirFile, 'w')
 			choose_DLDir = raw_input("Choose a default download directory (e.g. ~/get-chromium): ")
 			
-			if not choose_DLDir: #the user doesn't select a default DL directory
-				#save current directory to DLDirFile
+			if not choose_DLDir:
 				default_DLDir = os.getcwd()
+				touch_DLDirFile = open(DLDirFile, 'w')
 				touch_DLDirFile.write(default_DLDir)
 				touch_DLDirFile.close()
 				
+				open_DLDirFile = open(DLDirFile, 'r')
 				userDLDir = open_DLDirFile.read()
 				open_DLDirFile.close()
 		else:
 			open_DLDirFile.close()
 			
+	if userDLDir[-1:] != '/':
+		userDLDir = userDLDir + '/'
+	else:
+		pass
+		
 	return RevisionFile, userDLDir
 
 def CheckPriorRevision(RevisionFile, SnapshotRev):
@@ -213,6 +227,8 @@ def GetSnapshot(osStringAppend, SnapshotRev, dlfile, userDLDir):
 		os.chdir(userDLDir)
 		downloadSnapshot = urllib.urlretrieve(SnapshotURL, dlfile, reporthook=dlProgress)
 		reachSnapshotFile.close()
+		
+		print "\nSaved under %s" % userDLDir + dlfile
 	except urllib2.URLError:
 		print "Couldn't retrieve the requested snapshot. Exiting..."
 		sys.exit()
@@ -234,4 +250,4 @@ if __name__ == '__main__':
 	CheckPriorRevision(RevisionFile, SnapshotRev)
 	GetSnapshot(osStringAppend, SnapshotRev, dlfile, userDLDir)
 	LogNewInstall(RevisionFile, SnapshotRev)
-	print "\nDone. Exiting...\r"
+	print "Done. Exiting...\r"
