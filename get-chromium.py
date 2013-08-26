@@ -161,11 +161,11 @@ def CheckDirsFiles():
 		open_DLDirFile = open(DLDirFile, 'r')
 		userDLDir = open_DLDirFile.read()
 		
-		if not userDLDir: #if DLDir is an empty string
+		if not userDLDir: #userDLDir is an empty string
 			touch_DLDirFile = open(DLDirFile, 'w')
 			choose_DLDir = raw_input("Choose a default download directory (e.g. ~/get-chromium): ")
 			
-			if not choose_DLDir: #if the user doesn't select a default DL directory
+			if not choose_DLDir: #the user doesn't select a default DL directory
 				#save current directory to DLDirFile
 				default_DLDir = os.getcwd()
 				touch_DLDirFile.write(default_DLDir)
@@ -173,7 +173,7 @@ def CheckDirsFiles():
 				
 				userDLDir = open_DLDirFile.read()
 				open_DLDirFile.close()
-		else: #all is good, just save DLDir in userDLDir
+		else:
 			open_DLDirFile.close()
 			
 	return RevisionFile, userDLDir
