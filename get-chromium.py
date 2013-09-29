@@ -5,7 +5,7 @@
 #               git repository: https://github.com/iceTwy/get-chromium.git
 #               website: https://github.com/iceTwy/get-chromium
 #       
-#               author: iceTwy <icetwy@inventati.org> (icetwy.re)
+#               author: iceTwy <icetwy@icetwy.re> (icetwy.re)
 #               
 # LICENSE
 #
