@@ -20,7 +20,8 @@ Depending on your OS, you must install the following programs to run get-chromiu
 * [PyPy 2.1](http://pypy.org/download.html "Download PyPy") for Linux ARM
 * Python modules urllib & urllib2
 
-_Note: get-chromium has not been tested on Linux ARM. Please open an issue if it doesn't work properly._
+_Note: get-chromium has not been tested on Linux ARM. On another note, I don't know if it works with QPython 
+either. Please open an issue if it doesn't._
 
 ### Downloading Chromium
 
